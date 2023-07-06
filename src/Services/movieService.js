@@ -2,7 +2,7 @@ import axios from "axios";
 const baseUrl = "https://api.themoviedb.org/3/movie/popular?api_key=2a422df11485ab6d54f06c0c296c9dc8";
 
 const getAll = () => {
-    const request = axios.get(`${baseUrl}&page=1`);
+    const request = axios.get(`${baseUrl}&page=1&page2`);
     return request.then(response => {
         return response.data;
     })

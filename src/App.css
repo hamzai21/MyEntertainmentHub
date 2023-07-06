@@ -11,6 +11,8 @@ body {
   padding-left: 10px;
 }
 
+/*CSS For Taskbar ********************************************************************************************************************************/
+
 .taskbar {
   list-style-type: none;
   margin: 0;
@@ -45,9 +47,13 @@ body {
 #last-child:hover {
   background-color: #333;
 }
+/* Taskbar CSS end ********************************************************************************************************************************/
+
+/* CSS for horizontal list of movies ********************************************************************************************************************************/
 
 .movie-list {
-  overflow-x: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -64,7 +70,7 @@ body {
   vertical-align: top;
   background-color: #1A1A1A;
   border: 1px solid #222;
-    border-radius: 10px;
+  border-radius: 10px;
 }
 
 .movie img {
@@ -80,17 +86,42 @@ body {
   height: 50px;
 }
 
+/** CSS For movie-list buttons ********************************************************************************************************************************/
 .movie button {
     display: inline-block;
-      padding: 10px 20px;
-      background-color: #333;
-      /* Dark background color */
-      color: #4899EF;
-      /* Text color */
-      border: none;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 16px;
+    padding: 10px 20px;
+    background-color: #333;
+    /* Dark background color */
+    color: #4899EF;
+    /* Text color */
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.displayed {
+  position: absolute;
+  margin-right: 5px;
+  background: rgba(20, 20, 20, 0.1);
+  color: white;
+  height: 50px;
+}
+
+.not-displayed {
+  display: none;
+}
+
+.scroll-right-button {
+  right: 0;
+}
+
+.scroll-left-button {
+  left: 0;
+}
+
+.scroll-right:hover {
+  background: rgba(20, 20, 20, 0.8)
 }
 
 /* Hover effect */
@@ -104,3 +135,5 @@ body {
   background-color: #222;
   /* Even darker background color when button is pressed */
 }
+/** Movie-list button css ends ********************************************************************************************************************************/
+/* End of movie-list component CSS ********************************************************************************************************************************/

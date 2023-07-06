@@ -5,32 +5,23 @@ import MovieList from './Components/MovieList';
 import movieService from './Services/movieService';
 
 function App() {
-  const [allMovies, setAllMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [testOne, setTestOne] = useState([]);
   const [testTwo, setTestTwo] = useState([]);
   const [myList, setMyList] = useState([]);
 
   useEffect(() => {
-    movieService
-    .getAll()
+    movieService.getAll()
     .then(data => {
-      setMovies(data.results);
-      setAllMovies(allMovies.concat(data.results))
+      setMovies(movies.concat(data.results));
+      })
+    movieService.getPage(2)
+    .then(data => {
+      setTestOne(testOne.concat(data.results));
     })
-
-    movieService
-    .getPage(2)
+    movieService.getPage(3)
     .then(data => {
-      setTestOne(data.results);
-      setAllMovies(allMovies.concat(data.results))
-    })
-
-    movieService
-    .getPage(3)
-    .then(data => {
-      setTestTwo(data.results);
-      setAllMovies(allMovies.concat(data.results))
+      setTestTwo(testTwo.concat(data.results));
     })
   }, []);
 
@@ -46,13 +37,11 @@ function App() {
       <h1>My List</h1>
       {myList.length === 0 ? <h4>empty</h4> : <MovieList movies={myList} addMovie={handleAddList} hideButton={true}/>}
       <h1>Movies</h1>
-      <MovieList movies={allMovies} addMovie={handleAddList}/>
+      <MovieList movies={movies} addMovie={handleAddList}/>
       <h1>Movies</h1>
-      <MovieList movies={movies}/>
+      <MovieList movies={testOne} addMovie={handleAddList}/>
       <h1>Movies</h1>
-      <MovieList movies={testOne}/>
-      <h1>Movies</h1>
-      <MovieList movies={testTwo}/>
+      <MovieList movies={testTwo} addMovie={handleAddList}/>
     </div>
   );
 }
