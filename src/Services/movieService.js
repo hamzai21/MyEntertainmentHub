@@ -1,8 +1,15 @@
 import axios from "axios";
-const baseUrl = "https://api.themoviedb.org/3/movie/popular?page=1&api_key=2a422df11485ab6d54f06c0c296c9dc8";
+const baseUrl = "https://api.themoviedb.org/3/movie/popular?api_key=2a422df11485ab6d54f06c0c296c9dc8";
 
 const getAll = () => {
-    const request = axios.get(baseUrl);
+    const request = axios.get(`${baseUrl}&page=1`);
+    return request.then(response => {
+        return response.data;
+    })
+}
+
+const getPage = (number) => {
+    const request = axios.get(`${baseUrl}&page=${number}`);
     return request.then(response => {
         return response.data;
     })
@@ -15,4 +22,4 @@ const getPoster = () => {
     })
 }
 
-export default {getAll, getPoster};
+export default {getAll, getPage, getPoster};

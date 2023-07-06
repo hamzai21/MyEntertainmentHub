@@ -4,6 +4,7 @@ body {
   background-color: #000;
   color: white;
   font-family: "Roboto";
+  margin: 0px;
 }
 
 .App h1 {
@@ -11,7 +12,6 @@ body {
 }
 
 .taskbar {
-  border: 1px solid #222;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -35,11 +35,15 @@ body {
 #center-child {
   float: none;
   display: inline-block;
-  margin-left: 30%;
+  margin-left: 23%;
 }
 
 #last-child {
   float: right;
+}
+
+#last-child:hover {
+  background-color: #333;
 }
 
 .movie-list {
@@ -48,6 +52,8 @@ body {
   flex-direction: row;
   align-items: center;
   text-align: center;
+  border: 1px solid #222;
+  border-radius: 10px;
 }
 
 .movie {
@@ -57,6 +63,8 @@ body {
   height: 380px;
   vertical-align: top;
   background-color: #1A1A1A;
+  border: 1px solid #222;
+    border-radius: 10px;
 }
 
 .movie img {
@@ -69,7 +77,7 @@ body {
   white-space: initial;
   text-align: center;
   margin-top: 10px;
-  height: 45px;
+  height: 50px;
 }
 
 .movie button {
