@@ -1,16 +1,25 @@
 import './App.css';
 import {useState, useEffect} from 'react';
-import Taskbar from './Components/Taskbar';
-import MovieList from './Components/MovieList';
 import movieService from './Services/movieService';
+import axios from 'axios';
+import Taskbar from '../src/Components/Taskbar';
+import MovieList from '../src/Components/MovieList';
+
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [testOne, setTestOne] = useState([]);
   const [testTwo, setTestTwo] = useState([]);
   const [myList, setMyList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    axios.get('http://localhost:3001/api/movies')
+    .then(response => { setMyList(response.data)})
+    .catch(error => {
+      console.log(error);
+    })
+
     movieService.getAll()
     .then(data => {
       setMovies(movies.concat(data.results));
@@ -23,26 +32,40 @@ function App() {
     .then(data => {
       setTestTwo(testTwo.concat(data.results));
     })
+    setIsLoading(false);
   }, []);
 
   const handleAddList = (newMovie) => {
     console.log("Test ", newMovie);
     const checkList = myList.filter(movie => movie.id === newMovie.id);
-    checkList.length === 0 ? setMyList(myList.concat(newMovie)) : alert("Already in List");
+    console.log(myList);
+    if (checkList.length === 0) {
+      const movieObject = {poster_path: newMovie.poster_path, original_title: newMovie.original_title, id: newMovie.id};
+      movieService.addMovie(movieObject)
+      .then( response => {
+        setMyList(myList.concat(response));
+      })
+      .catch(error => 
+        console.log(error)
+      )
+    }
+    else {
+      alert("Already in List");
+    }
   }
 
   return (
-    <div className="App">
+   <div className="App">
       <Taskbar/>
       <h1>My List</h1>
-      {myList.length === 0 ? <h4>empty</h4> : <MovieList movies={myList} addMovie={handleAddList} hideButton={true}/>}
+      {myList.length === 0 ? <p></p> : <MovieList movies={myList} addMovie={handleAddList} hideButton={true}/>}
       <h1>Movies</h1>
-      <MovieList movies={movies} addMovie={handleAddList}/>
+      {!isLoading && <MovieList movies={movies} addMovie={handleAddList}/>}
       <h1>Movies</h1>
       <MovieList movies={testOne} addMovie={handleAddList}/>
       <h1>Movies</h1>
       <MovieList movies={testTwo} addMovie={handleAddList}/>
-    </div>
+    </div> 
   );
 }
 
