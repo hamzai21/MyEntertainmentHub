@@ -1,9 +1,57 @@
-import Taskbar from '../Components/Taskbar';
 import MovieList from '../Components/MovieList';
+import {useState, useEffect} from 'react';
+import movieService from '../Services/movieService';
+import axios from 'axios';
 
-const Home = ({handleAddList, myList, movies, testOne, testTwo, isLoading}) => {
-    <div className="App">
-      <Taskbar/>
+const Home = () => {
+
+  const [movies, setMovies] = useState([]);
+  const [testOne, setTestOne] = useState([]);
+  const [testTwo, setTestTwo] = useState([]);
+  const [myList, setMyList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/api/movies')
+    .then(response => { setMyList(response.data)})
+    .catch(error => {
+      console.log(error);
+    })
+
+    movieService.getAll()
+    .then(data => {
+      setMovies(movies.concat(data.results));
+      })
+    movieService.getPage(2)
+    .then(data => {
+      setTestOne(testOne.concat(data.results));
+    })
+    movieService.getPage(3)
+    .then(data => {
+      setTestTwo(testTwo.concat(data.results));
+    })
+    setIsLoading(false);
+  }, []);
+
+  const handleAddList = (newMovie) => {
+    const checkList = myList.filter(movie => movie.id === newMovie.id);
+    if (checkList.length === 0) {
+      const movieObject = {poster_path: newMovie.poster_path, original_title: newMovie.original_title, id: newMovie.id};
+      movieService.addMovie(movieObject)
+      .then( response => {
+        setMyList(myList.concat(response));
+      })
+      .catch(error => 
+        console.log(error)
+      )
+    }
+    else {
+      alert("Already in List");
+    }
+  }
+
+  return(
+    <div>
       <h1>My List</h1>
       {myList.length === 0 ? <p></p> : <MovieList movies={myList} handleAddList={handleAddList} hideButton={true}/>}
       <h1>Movies</h1>
@@ -13,6 +61,7 @@ const Home = ({handleAddList, myList, movies, testOne, testTwo, isLoading}) => {
       <h1>Movies</h1>
       <MovieList movies={testTwo} addMovie={handleAddList}/>
     </div>
+  )
 }
 
 export default Home;

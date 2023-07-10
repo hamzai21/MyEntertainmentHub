@@ -28,8 +28,14 @@ const addMovie = movie => {
 }
 
 const searchQuery = query => {
-    const request = axios.get(`https://api.themoviedb.org/3/search/movie?api_key=2a422df11485ab6d54f06c0c296c9dc8&query="${query}"`);
+    const request = axios
+    .get(`https://api.themoviedb.org/3/search/movie?api_key=2a422df11485ab6d54f06c0c296c9dc8&query="${query}"`);
     return request.then(response => response.data);
 }
 
-export default {getAll, getPage, getPoster, addMovie, searchQuery};
+const getMovie = id => {
+    const request = axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=2a422df11485ab6d54f06c0c296c9dc8`);
+    return request.then(response => response.data);
+}
+
+export default {getAll, getPage, getPoster, addMovie, searchQuery, getMovie};

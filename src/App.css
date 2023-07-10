@@ -26,12 +26,27 @@ body {
   display: block;
   color: white;
   text-align: center;
-  padding: 18px 20px;
   text-decoration: none;
+}
+
+.taskbar li > a:visited{
+  color: white;
+  text-decoration: none;
+}
+
+.taskbar li>a {
+  display: block;
+  text-decoration: none;
+  height: 100%;
+  padding: 18px 20px;
 }
 
 .taskbar li:hover {
   background-color: #111;
+}
+
+.taskbar li:active {
+  background-color: #000;
 }
 
 #center-child {
@@ -63,6 +78,7 @@ body {
   background: #444;
   width: 400px;
   margin-left: 3px;
+  z-index: 999;
 }
 
 .search-results img {
@@ -170,4 +186,14 @@ body {
   /* Even darker background color when button is pressed */
 }
 /** Movie-list button css ends ********************************************************************************************************************************/
+
+/** Movie-detailed view css ********************************************************************************************************************************/
+.movie-details {
+  display: flex;
+}
+
+.movie-details span {
+  margin: 10px;
+}
+
 /* End of movie-list component CSS ********************************************************************************************************************************/

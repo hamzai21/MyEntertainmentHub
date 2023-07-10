@@ -2,29 +2,31 @@ import movieService from '../Services/movieService';
 import SearchQuery from './SearchQuery';
 import { useState, useEffect } from 'react';
 
-const SearchResults = ({searchTerm}) => {
+const SearchResults = ({searchTerm, toggleMenu}) => {
     const [searchResults, setSearchResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    
+
     useEffect(() => {
-        console.log(searchTerm)
         movieService
         .searchQuery(searchTerm)
+        .catch(error => {
+            console.log(`No movies found from term ${searchTerm}`);
+        })
         .then(response => {
             setSearchResults(response.results);
-            console.log("test ", searchResults);
         })
         .then(response =>{ 
             setIsLoading(false);
         })
-    }, [searchTerm]) 
+    }, [searchTerm, toggleMenu]) 
 
     return(
         <div className="search-results">
-            {!isLoading && searchResults.slice(0,7).map(movie =>  
-                <SearchQuery
-                key={movie.id} 
-                movie={movie}/>
+            {toggleMenu && !isLoading && searchResults.slice(0,7).map(movie =>  
+            <SearchQuery
+            key={movie.id} 
+            movie={movie}
+            />
             )}
         </div>
     )
