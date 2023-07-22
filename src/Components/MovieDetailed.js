@@ -12,9 +12,8 @@ const MovieDetailed = () => {
         movieService.getMovie(id)
         .then(response => {
             setMovie(response);
-            console.log(response);
         })
-    }, [])
+    }, [id])
 
     return (
         <div>
