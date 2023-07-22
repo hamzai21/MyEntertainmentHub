@@ -1,4 +1,5 @@
-import SearchResults from '../Components/SearchResults';
+import './Taskbar.css';
+import SearchResults from '../SearchResults';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 

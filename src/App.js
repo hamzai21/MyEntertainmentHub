@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Routes, BrowserRouter} from 'react-router-dom'; 
 import Home from '../src/Components/Home'
-import Taskbar from './Components/Taskbar';
+import Taskbar from './Components/Taskbar/Taskbar';
 import MovieDetailed from './Components/MovieDetailed';
 
 function App() {

@@ -36,7 +36,7 @@ const Home = () => {
   const handleAddList = (newMovie) => {
     const checkList = myList.filter(movie => movie.id === newMovie.id);
     if (checkList.length === 0) {
-      const movieObject = {poster_path: newMovie.poster_path, original_title: newMovie.original_title, id: newMovie.id};
+      const movieObject = {poster_path: newMovie.poster_path, original_title: newMovie.original_title, movieId: newMovie.id};
       movieService.addMovie(movieObject)
       .then( response => {
         setMyList(myList.concat(response));

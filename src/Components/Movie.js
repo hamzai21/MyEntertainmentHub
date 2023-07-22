@@ -5,7 +5,7 @@ const Movie = ({movie, addMovie, hideButton}) => {
     const baseUrl = "https://image.tmdb.org/t/p/w185/";
 
     const navigateToResult = () => {
-        navigate(`/movie/${movie.id}`)
+        navigate(`/movie/${movie.movieId}`)
     }
 
     return (
